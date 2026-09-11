@@ -1,0 +1,32 @@
+# Generic fx68k core: synthesis + pre-PnR STA. No pads.
+# DESIGN_DIR is this directory (core/).
+
+DESIGN_NAME: fx68k
+PDK: gf180mcuD
+
+meta:
+  version: 2
+  flow:
+    - Yosys.Synthesis
+    - Checker.YosysUnmappedCells
+    - Checker.YosysSynthChecks
+    - OpenROAD.CheckSDCFiles
+    - OpenROAD.STAPrePNR
+
+VERILOG_FILES:
+  - dir::../src_v/fx68k.v
+  - dir::../src_v/uRom.v
+  - dir::../src_v/nanoRom.v
+
+VERILOG_INCLUDE_DIRS:
+  - dir::../src_v
+  - dir::../src
+
+CLOCK_PORT: clk
+CLOCK_PERIOD: 50.0
+
+PNR_SDC_FILE: dir::../constraints/fx68k.sdc
+SIGNOFF_SDC_FILE: dir::../constraints/fx68k.sdc
+FALLBACK_SDC: dir::../constraints/fx68k.sdc
+
+USE_SLANG: false

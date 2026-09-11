@@ -1,0 +1,26 @@
+# Generic fx68k core: Classic flow, no pad ring.
+# DESIGN_DIR is this directory (core/).
+
+DESIGN_NAME: fx68k
+PDK: gf180mcuD
+
+VERILOG_FILES:
+  - dir::../src_v/fx68k.v
+  - dir::../src_v/uRom.v
+  - dir::../src_v/nanoRom.v
+
+VERILOG_INCLUDE_DIRS:
+  - dir::../src_v
+  - dir::../src
+
+CLOCK_PORT: clk
+CLOCK_PERIOD: 50.0
+
+PNR_SDC_FILE: dir::../constraints/fx68k.sdc
+SIGNOFF_SDC_FILE: dir::../constraints/fx68k.sdc
+FALLBACK_SDC: dir::../constraints/fx68k.sdc
+
+USE_SLANG: false
+
+FP_CORE_UTIL: 30
+PL_TARGET_DENSITY_PCT: 40

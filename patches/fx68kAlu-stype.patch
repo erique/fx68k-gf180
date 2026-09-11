@@ -1,0 +1,20 @@
+--- a/fx68kAlu.sv	2026-09-11 09:14:43.907206880 +0200
++++ b/fx68kAlu.sv	2026-09-11 09:43:59.985312254 +0200
+@@ -718,14 +718,9 @@
+ 				row = `ALU_ROW_02;			// add/adda
+ 		'he:
+ 			begin
+-				reg [1:0] stype;
+-				
+-				if( size11)					// memory shift/rotate
+-					stype = ird[ 10:9];
+-				else						// register shift/rotate
+-					stype = ird[ 4:3];
+-
+-				case( {stype, ird[8]})
++				// Shift/rotate type is a purely combinational decode of IRD
++				// (memory form uses ird[10:9], register form uses ird[4:3]).
++				case( {(size11 ? ird[10:9] : ird[4:3]), ird[8]})
+ 				0: row = `ALU_ROW_02;	// ASR
+ 				1: row = `ALU_ROW_03;	// ASL
+ 				2: row = `ALU_ROW_05;	// LSR
