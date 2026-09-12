@@ -31,8 +31,10 @@ Needs Python 3.10+. `make clone-pdk` creates `.venv` and installs
 - **LibreLane** — host binary if `librelane` and `yosys` are on `PATH`;
   otherwise `.venv` runs `python3 -m librelane --dockerized`.
 
-Constraints: `constraints/fx68k.sdc` (clock and Ir→microAddr/nanoAddr
-multicycle). Optional 68000 bus I/O: `constraints/fx68k_io.sdc` (not
-sourced by default).
+Constraints: `constraints/fx68k.sdc` is the core STA model (clock on
+`clk`, `enPhi1`/`enPhi2` as data enables, Ir→microAddr/nanoAddr
+multicycle). No pad names. 68000 asynchronous-bus AC is the parent chip
+SDC (`fx68k-gf180-chip` `librelane/chip_top.sdc`), which sources this
+file. `constraints/fx68k_io.sdc` is not for Classic and is not sourced.
 
-MC68000 user manual extract: `docs/MC68000UM.txt`.
+MC68000 user manual extract: `docs/MC68000UM.txt` (§10.10 10 MHz column).
